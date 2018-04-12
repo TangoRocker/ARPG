@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "ARPGCharacter.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHealthUpdateDelegate);
+
 UCLASS(Blueprintable)
 class AARPGCharacter : public ACharacter
 {
@@ -13,6 +15,24 @@ class AARPGCharacter : public ACharacter
 
 public:
 	AARPGCharacter();
+
+	UPROPERTY(BlueprintAssignable, BlueprintReadWrite)
+	FHealthUpdateDelegate healthDelegate;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float health_MAX;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float health_CURRENT;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float mana_MAX;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float mana_CURRENT;
+
+	UFUNCTION(BlueprintCallable)
+	void updateCurrentHealth(float value);
 
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
@@ -25,6 +45,9 @@ public:
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
 
 private:
+
+	void initUnrealEngine();
+
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* TopDownCameraComponent;

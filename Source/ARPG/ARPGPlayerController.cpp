@@ -32,17 +32,51 @@ void AARPGPlayerController::SetupInputComponent()
 	InputComponent->BindAction("SetDestination", IE_Pressed, this, &AARPGPlayerController::OnSetDestinationPressed);
 	InputComponent->BindAction("SetDestination", IE_Released, this, &AARPGPlayerController::OnSetDestinationReleased);
 
-	// support touch devices 
-	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &AARPGPlayerController::MoveToTouchLocation);
-	InputComponent->BindTouch(EInputEvent::IE_Repeat, this, &AARPGPlayerController::MoveToTouchLocation);
+	InputComponent->BindAction("ActionButton1", IE_Pressed, this, &AARPGPlayerController::OnAction_1);
+	InputComponent->BindAction("ActionButton2", IE_Pressed, this, &AARPGPlayerController::OnAction_2);
+	InputComponent->BindAction("ActionButton3", IE_Pressed, this, &AARPGPlayerController::OnAction_3);
+	InputComponent->BindAction("ActionButton4", IE_Pressed, this, &AARPGPlayerController::OnAction_4);
+	InputComponent->BindAction("ActionButton5", IE_Pressed, this, &AARPGPlayerController::OnAction_5);
 
-	InputComponent->BindAction("ResetVR", IE_Pressed, this, &AARPGPlayerController::OnResetVR);
+	InputComponent->BindAction("InventoryButton", IE_Pressed, this, &AARPGPlayerController::OnInvetoryShow);
+
+
+}
+
+void AARPGPlayerController::OnInvetoryShow() {
+
 }
 
 void AARPGPlayerController::OnResetVR()
 {
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
+
+void AARPGPlayerController::OnAction_1() {
+	if (AARPGCharacter* MyPawn = Cast<AARPGCharacter>(GetPawn())) {
+		MyPawn->updateCurrentHealth(MyPawn->health_CURRENT - 10);
+	}
+}
+
+void AARPGPlayerController::OnAction_2() {
+	if (AARPGCharacter* MyPawn = Cast<AARPGCharacter>(GetPawn())) {
+		MyPawn->updateCurrentHealth(MyPawn->health_CURRENT + 10);
+	}
+}
+
+void AARPGPlayerController::OnAction_3() {
+
+}
+
+void AARPGPlayerController::OnAction_4() {
+
+}
+
+void AARPGPlayerController::OnAction_5() {
+
+}
+
+
 
 void AARPGPlayerController::MoveToMouseCursor()
 {

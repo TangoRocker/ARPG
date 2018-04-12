@@ -14,6 +14,13 @@
 
 AARPGCharacter::AARPGCharacter()
 {
+	this->initUnrealEngine();
+	
+	this->health_MAX = 100;
+	this->health_CURRENT = 100;
+}
+
+void AARPGCharacter::initUnrealEngine() {
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -36,12 +43,12 @@ AARPGCharacter::AARPGCharacter()
 	CameraBoom->RelativeRotation = FRotator(-60.f, 0.f, 0.f);
 	CameraBoom->bDoCollisionTest = false; // Don't want to pull camera in when it collides with level
 
-	// Create a camera...
+										  // Create a camera...
 	TopDownCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("TopDownCamera"));
 	TopDownCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCameraComponent->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	// Create a decal in the world to show the cursor's location
+															 // Create a decal in the world to show the cursor's location
 	CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
 	CursorToWorld->SetupAttachment(RootComponent);
 	static ConstructorHelpers::FObjectFinder<UMaterial> DecalMaterialAsset(TEXT("Material'/Game/TopDownCPP/Blueprints/M_Cursor_Decal.M_Cursor_Decal'"));
@@ -55,6 +62,12 @@ AARPGCharacter::AARPGCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+	//FHealthDelegate.add(this, &AARPGCharacter::postUpdate);
+};
+
+void AARPGCharacter::updateCurrentHealth(float value) {
+	this->health_CURRENT = value;
+	healthDelegate.Broadcast();
 }
 
 void AARPGCharacter::Tick(float DeltaSeconds)
