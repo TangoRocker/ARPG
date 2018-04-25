@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "ARPGCharacter.h"
 
+
 #include "ARPGPlayerController.generated.h"
 
 
@@ -21,6 +22,8 @@ protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
 	uint32 bMoveToMouseCursor : 1;
 	AARPGCharacter *MyPawn;
+
+	
 
 	// Begin PlayerController interface
 	virtual void PlayerTick(float DeltaTime) override;

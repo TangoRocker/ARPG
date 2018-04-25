@@ -2,7 +2,11 @@
 
 #pragma once
 
+
+
+
 #include "CoreMinimal.h"
+#include "ARPGWeapon.h"
 #include "GameFramework/Character.h"
 #include "ARPGCharacter.generated.h"
 
@@ -33,6 +37,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void updateCurrentHealth(float value);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	AARPGWeapon *Weapon;
 
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;

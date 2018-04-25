@@ -13,7 +13,6 @@ AARPGPlayerController::AARPGPlayerController()
 {
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
-	
 }
 
 void AARPGPlayerController::BeginPlay() {
@@ -69,13 +68,14 @@ void AARPGPlayerController::OnAction_1() {
 
 void AARPGPlayerController::OnAction_2() {
 	if (GetPawn()) {
-		MyPawn->updateCurrentHealth(MyPawn->health_CURRENT + 10);
+		//MyPawn->updateCurrentHealth(MyPawn->health_CURRENT + 10);
+		MyPawn->Weapon->Fire();
 	}
 }
 
 void AARPGPlayerController::OnAction_3() {
 	if (GetPawn()) {
-		
+		MyPawn->Weapon->PullTrigger();
 	}
 }
 
