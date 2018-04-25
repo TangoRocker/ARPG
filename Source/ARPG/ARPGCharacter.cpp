@@ -63,6 +63,7 @@ void AARPGCharacter::initUnrealEngine() {
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
 	//FHealthDelegate.add(this, &AARPGCharacter::postUpdate);
+	
 };
 
 void AARPGCharacter::updateCurrentHealth(float value) {

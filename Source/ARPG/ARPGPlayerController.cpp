@@ -4,13 +4,21 @@
 #include "AI/Navigation/NavigationSystem.h"
 #include "Runtime/Engine/Classes/Components/DecalComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
-#include "ARPGCharacter.h"
+
 #include "Engine/World.h"
+#include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
+#include "ARPGWeapon.h"
 
 AARPGPlayerController::AARPGPlayerController()
 {
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
+	
+}
+
+void AARPGPlayerController::BeginPlay() {
+	Super::BeginPlay();
+	MyPawn = Cast<AARPGCharacter>(GetPawn());
 }
 
 void AARPGPlayerController::PlayerTick(float DeltaTime)
@@ -53,19 +61,22 @@ void AARPGPlayerController::OnResetVR()
 }
 
 void AARPGPlayerController::OnAction_1() {
-	if (AARPGCharacter* MyPawn = Cast<AARPGCharacter>(GetPawn())) {
+	
+	if (GetPawn()) {
 		MyPawn->updateCurrentHealth(MyPawn->health_CURRENT - 10);
 	}
 }
 
 void AARPGPlayerController::OnAction_2() {
-	if (AARPGCharacter* MyPawn = Cast<AARPGCharacter>(GetPawn())) {
+	if (GetPawn()) {
 		MyPawn->updateCurrentHealth(MyPawn->health_CURRENT + 10);
 	}
 }
 
 void AARPGPlayerController::OnAction_3() {
-
+	if (GetPawn()) {
+		
+	}
 }
 
 void AARPGPlayerController::OnAction_4() {
