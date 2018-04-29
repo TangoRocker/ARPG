@@ -25,9 +25,9 @@ void AARPGWeapon::Tick(float DeltaTime)
 
 }
 
-void AARPGWeapon::PullTrigger_Implementation()
+void AARPGWeapon::Attack_Implementation()
 {
-	
+
 
 }
 
@@ -42,4 +42,11 @@ void AARPGWeapon::ReleaseTrigger_Implementation()
 	
 
 }
+
+void AARPGWeapon::PullTrigger_Implementation()
+{
+
+
+}
+
 
