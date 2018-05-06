@@ -11,6 +11,8 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Materials/Material.h"
 #include "Engine/World.h"
+#include "Skills/BasicSkill.h"
+#include "Skills/PlayerMovement.h"
 
 AARPGCharacter::AARPGCharacter()
 {
@@ -63,7 +65,10 @@ void AARPGCharacter::initUnrealEngine() {
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
 	//FHealthDelegate.add(this, &AARPGCharacter::postUpdate);
-	
+
+	PlayerMovement moveSkill(false, false, false, 1, this);
+		//PlayerMovement(false, false, false, 1, this)
+	this->skillList[0] = (BasicSkill) moveSkill;
 };
 
 void AARPGCharacter::updateCurrentHealth(float value) {

@@ -8,6 +8,7 @@
 #include "CoreMinimal.h"
 #include "ARPGWeapon.h"
 #include "GameFramework/Character.h"
+#include "Skills/BasicSkill.h"
 #include "ARPGCharacter.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHealthUpdateDelegate);
@@ -23,6 +24,8 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintReadWrite)
 	FHealthUpdateDelegate healthDelegate;
 	
+	BasicSkill skillList[10];
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float health_MAX;
 
