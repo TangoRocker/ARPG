@@ -8,9 +8,9 @@
 AARPGEnemy::AARPGEnemy()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-	this->health_MAX = 100;
-	this->health_CURRENT = 100;
+	//PrimaryActorTick.bCanEverTick = true;
+	//this->health_MAX = 100;
+	//this->health_CURRENT = 100;
 }
 
 // Called when the game starts or when spawned
