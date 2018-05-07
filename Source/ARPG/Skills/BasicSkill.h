@@ -4,15 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "../Input/IUserInput.h"
+//#include "BasicSkill.generated.h"
 
 class AARPGCharacter;
 /**
  * 
  */
-UCLASS()
+//UCLASS()
 class ARPG_API BasicSkill : public IUserInput
 {
-	GENERATED_BODY()
+	//GENERATED_BODY()
 
 	public:
 

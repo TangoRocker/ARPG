@@ -33,6 +33,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float mana_MAX;
 
+	BasicSkill *skillList[10];
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float mana_CURRENT;
 
@@ -56,7 +58,7 @@ private:
 
 	void initUnrealEngine();
 
-	BasicSkill *skillList[10];
+	
 
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
