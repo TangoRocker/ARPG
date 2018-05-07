@@ -24,8 +24,6 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintReadWrite)
 	FHealthUpdateDelegate healthDelegate;
 	
-	BasicSkill *skillList[10];
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float health_MAX;
 
@@ -57,6 +55,8 @@ public:
 private:
 
 	void initUnrealEngine();
+
+	BasicSkill *skillList[10];
 
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))

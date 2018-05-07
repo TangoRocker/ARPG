@@ -9,8 +9,11 @@ class AARPGCharacter;
 /**
  * 
  */
+UCLASS()
 class ARPG_API BasicSkill : public IUserInput
 {
+	GENERATED_BODY()
+
 	public:
 
 		bool isActive;

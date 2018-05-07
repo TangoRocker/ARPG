@@ -68,11 +68,8 @@ void AARPGCharacter::initUnrealEngine() {
 
 	PlayerMovement *moveSkill = new PlayerMovement(false, false, false, 1, this);
 	moveSkill->isActive = false;
-		//PlayerMovement(false, false, false, 1, this)
+		
 	this->skillList[0] = moveSkill;
-	this->skillList[0]->onBindingPress();
-	this->skillList[0]->onBindingRelease();
-	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf("skill priority %i", this->skillList[0]->priority));
 };
 
 void AARPGCharacter::updateCurrentHealth(float value) {

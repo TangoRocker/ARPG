@@ -14,9 +14,7 @@ PlayerMovement::PlayerMovement(bool interupt, bool async, bool animSkip, int pri
 	BasicSkill(interupt, async, animSkip, priority, actor)
 {
 	this->isActive = false;
-	if (owner) {
-		this->controler = Cast<AARPGPlayerController>(owner->GetController());
-	}
+	this->controler = NULL;
 }
 
 void PlayerMovement::onBindingPress(){
@@ -40,8 +38,12 @@ void PlayerMovement::executeAction() {
 	{
 		// Trace to see what is under the mouse cursor
 		FHitResult Hit;
+		if (this->controler == NULL) {
+			this->controler = Cast<AARPGPlayerController>(owner->GetController());
+		}
+
 		this->controler->GetHitResultUnderCursor(ECC_Visibility, false, Hit);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "el else del execute");
+		
 		if (Hit.bBlockingHit)
 		{
 			// We hit something, move there
