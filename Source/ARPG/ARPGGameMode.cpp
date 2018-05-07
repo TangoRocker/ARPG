@@ -7,6 +7,7 @@
 
 AARPGGameMode::AARPGGameMode()
 {
+
 	// use our custom PlayerController class
 	PlayerControllerClass = AARPGPlayerController::StaticClass();
 
