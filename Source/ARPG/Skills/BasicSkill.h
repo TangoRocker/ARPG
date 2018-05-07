@@ -23,9 +23,9 @@ class ARPG_API BasicSkill : public IUserInput
 		BasicSkill();
 		BasicSkill(bool interupt, bool async, bool animSkip, int priority, class AARPGCharacter *actor);
 
-		void executeAction(void);
+		/*void executeAction(void);
 		void onBindingPress(void);
-		void onBindingRelease(void);
+		void onBindingRelease(void);*/
 
-		~BasicSkill();
+		virtual ~BasicSkill() = 0;
 };

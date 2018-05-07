@@ -6,6 +6,8 @@
 #include "HeadMountedDisplayFunctionLibrary.h"
 
 #include "Engine/World.h"
+
+#include "EngineGlobals.h"
 #include "Runtime/CoreUObject/Public/UObject/ConstructorHelpers.h"
 #include "ARPGWeapon.h"
 
@@ -24,11 +26,10 @@ void AARPGPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	// keep updating the destination every tick while desired
-	if (bMoveToMouseCursor)
-	{
-		MoveToMouseCursor();
+	if (MyPawn->skillList[0]->isActive) {
+		MyPawn->skillList[0]->executeAction();
 	}
+		
 }
 
 void AARPGPlayerController::SetupInputComponent()
@@ -50,6 +51,18 @@ void AARPGPlayerController::SetupInputComponent()
 
 }
 
+
+void AARPGPlayerController::OnSetDestinationPressed() {
+	if (MyPawn->skillList[0] != NULL) {
+		MyPawn->skillList[0]->onBindingPress();
+	}
+	
+}
+
+void AARPGPlayerController::OnSetDestinationReleased() {
+	MyPawn->skillList[0]->onBindingRelease();
+}
+
 void AARPGPlayerController::OnInvetoryShow() {
 
 }
@@ -60,7 +73,6 @@ void AARPGPlayerController::OnResetVR()
 }
 
 void AARPGPlayerController::OnAction_1() {
-	
 	if (GetPawn()) {
 		MyPawn->updateCurrentHealth(MyPawn->health_CURRENT - 10);
 	}
@@ -85,74 +97,4 @@ void AARPGPlayerController::OnAction_4() {
 
 void AARPGPlayerController::OnAction_5() {
 
-}
-
-
-
-void AARPGPlayerController::MoveToMouseCursor()
-{
-	if (UHeadMountedDisplayFunctionLibrary::IsHeadMountedDisplayEnabled())
-	{
-		if (AARPGCharacter* MyPawn = Cast<AARPGCharacter>(GetPawn()))
-		{
-			if (MyPawn->GetCursorToWorld())
-			{
-				UNavigationSystem::SimpleMoveToLocation(this, MyPawn->GetCursorToWorld()->GetComponentLocation());
-			}
-		}
-	}
-	else
-	{
-		// Trace to see what is under the mouse cursor
-		FHitResult Hit;
-		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
-
-		if (Hit.bBlockingHit)
-		{
-			// We hit something, move there
-			SetNewMoveDestination(Hit.ImpactPoint);
-		}
-	}
-}
-
-void AARPGPlayerController::MoveToTouchLocation(const ETouchIndex::Type FingerIndex, const FVector Location)
-{
-	FVector2D ScreenSpaceLocation(Location);
-
-	// Trace to see what is under the touch location
-	FHitResult HitResult;
-	GetHitResultAtScreenPosition(ScreenSpaceLocation, CurrentClickTraceChannel, true, HitResult);
-	if (HitResult.bBlockingHit)
-	{
-		// We hit something, move there
-		SetNewMoveDestination(HitResult.ImpactPoint);
-	}
-}
-
-void AARPGPlayerController::SetNewMoveDestination(const FVector DestLocation)
-{
-	APawn* const MyPawn = GetPawn();
-	if (MyPawn)
-	{
-		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
-		float const Distance = FVector::Dist(DestLocation, MyPawn->GetActorLocation());
-
-		// We need to issue move command only if far enough in order for walk animation to play correctly
-		if (NavSys && (Distance > 120.0f))
-		{
-			NavSys->SimpleMoveToLocation(this, DestLocation);
-		}
-	}
-}
-
-void AARPGPlayerController::OnSetDestinationPressed()
-{
-	// set flag to keep updating destination until released
-	bMoveToMouseCursor = true;
-}
-
-void AARPGPlayerController::OnSetDestinationReleased()
-{
-	// clear flag to indicate we should stop updating the destination
-	bMoveToMouseCursor = false;
 }

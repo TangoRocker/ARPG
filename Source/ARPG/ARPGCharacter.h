@@ -24,7 +24,7 @@ public:
 	UPROPERTY(BlueprintAssignable, BlueprintReadWrite)
 	FHealthUpdateDelegate healthDelegate;
 	
-	BasicSkill skillList[10];
+	BasicSkill *skillList[10];
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float health_MAX;

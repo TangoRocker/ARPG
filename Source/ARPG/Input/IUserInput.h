@@ -2,7 +2,7 @@
 class ARPG_API IUserInput
 {
 	public:
-		void executeAction(void);
-		void onBindingPress(void);
-		void onBindingRelease(void);
+		virtual void executeAction(void) = 0;
+		virtual void onBindingPress(void) = 0;
+		virtual void onBindingRelease(void) = 0;
 };

@@ -13,10 +13,12 @@ BasicSkill::BasicSkill(bool interupt, bool async, bool animSkip, int priority, c
 {
 	this->isActive = false;
 }
-
+/*
 void BasicSkill::executeAction(void) {};
-void BasicSkill::onBindingPress(void) {};
-void BasicSkill::onBindingRelease(void) {};
+void BasicSkill::onBindingPress(void) {
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("onBindingPress BS.cpp"));
+};
+void BasicSkill::onBindingRelease(void) {};*/
 
 BasicSkill::~BasicSkill() {
 
