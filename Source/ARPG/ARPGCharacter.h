@@ -8,6 +8,7 @@
 #include "CoreMinimal.h"
 #include "ARPGWeapon.h"
 #include "GameFramework/Character.h"
+#include "Skills/BasicSkill.h"
 #include "ARPGCharacter.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHealthUpdateDelegate);
@@ -54,6 +55,8 @@ public:
 private:
 
 	void initUnrealEngine();
+
+	BasicSkill *skillList[10];
 
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
