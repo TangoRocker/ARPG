@@ -8,6 +8,7 @@
 #include "CoreMinimal.h"
 #include "ARPGWeapon.h"
 #include "GameFramework/Character.h"
+#include "Skills/BasicSkill.h"
 #include "ARPGCharacter.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FHealthUpdateDelegate);
@@ -32,6 +33,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float mana_MAX;
 
+	BasicSkill *skillList[10];
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float mana_CURRENT;
 
@@ -54,6 +57,8 @@ public:
 private:
 
 	void initUnrealEngine();
+
+	
 
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
