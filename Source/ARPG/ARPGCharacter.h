@@ -33,13 +33,22 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float mana_MAX;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool canTakeDamage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool canGetHealth;
+
 	BasicSkill *skillList[10];
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float mana_CURRENT;
 
 	UFUNCTION(BlueprintCallable)
-	void updateCurrentHealth(float value);
+	void takeDamage(float value);
+
+	UFUNCTION(BlueprintCallable)
+	void getHealth(float value);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AARPGWeapon *Weapon;
@@ -57,8 +66,7 @@ public:
 private:
 
 	void initUnrealEngine();
-
-	
+	bool canUpdateHealth;
 
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -71,5 +79,7 @@ private:
 	/** A decal that projects to the cursor location. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UDecalComponent* CursorToWorld;
+
+	void updateCurrentHealth(float value);
 };
 

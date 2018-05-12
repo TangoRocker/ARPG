@@ -20,6 +20,9 @@ AARPGCharacter::AARPGCharacter()
 	
 	this->health_MAX = 100;
 	this->health_CURRENT = 100;
+	this->canGetHealth = true;
+	this->canTakeDamage = true;
+	this->canUpdateHealth = true;
 }
 
 void AARPGCharacter::initUnrealEngine() {
@@ -73,8 +76,20 @@ void AARPGCharacter::initUnrealEngine() {
 };
 
 void AARPGCharacter::updateCurrentHealth(float value) {
-	this->health_CURRENT = value;
-	healthDelegate.Broadcast();
+	if (canUpdateHealth) {
+		this->health_CURRENT = value;
+		healthDelegate.Broadcast();
+	}
+}
+void AARPGCharacter::takeDamage(float value) {
+	if (canTakeDamage) {
+		this->updateCurrentHealth(this->health_CURRENT - value);
+	}
+}
+void AARPGCharacter::getHealth(float value) {
+	if (canGetHealth) {
+		this->updateCurrentHealth(this->health_CURRENT + value);
+	}
 }
 
 void AARPGCharacter::Tick(float DeltaSeconds)

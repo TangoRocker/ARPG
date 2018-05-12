@@ -74,7 +74,7 @@ void AARPGPlayerController::OnResetVR()
 
 void AARPGPlayerController::OnAction_1() {
 	if (GetPawn()) {
-		MyPawn->updateCurrentHealth(MyPawn->health_CURRENT - 10);
+		MyPawn->takeDamage(10);
 	}
 }
 
@@ -82,6 +82,7 @@ void AARPGPlayerController::OnAction_2() {
 	if (GetPawn()) {
 		//MyPawn->updateCurrentHealth(MyPawn->health_CURRENT + 10);
 		MyPawn->Weapon->Fire();
+		MyPawn->takeDamage(10);
 	}
 }
 
